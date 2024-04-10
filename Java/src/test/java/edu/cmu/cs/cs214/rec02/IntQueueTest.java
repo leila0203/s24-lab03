@@ -38,8 +38,8 @@ public class IntQueueTest {
     @Before
     public void setUp() {
         // comment/uncomment these lines to test each class
-        mQueue = new LinkedIntQueue();
-    //    mQueue = new ArrayIntQueue();
+        // mQueue = new LinkedIntQueue();
+       mQueue = new ArrayIntQueue();
 
         testList = new ArrayList<>(List.of(1, 2, 3));
     }
@@ -51,21 +51,22 @@ public class IntQueueTest {
     }
 
     @Test
-    public void testNotEmpty() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+    public void testNotEmpty() {        
+    mQueue.enqueue(10);
+    assertFalse(mQueue.isEmpty());
     }
 
     @Test
     public void testPeekEmptyQueue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+    assertTrue(mQueue.isEmpty());
+    assertNull(mQueue.peek());
     }
 
     @Test
     public void testPeekNoEmptyQueue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        mQueue.enqueue(10);
+        assertNotNull(mQueue.peek());
+
     }
 
     @Test
@@ -80,8 +81,25 @@ public class IntQueueTest {
 
     @Test
     public void testDequeue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        // Initially, the queue should be empty
+        assertTrue(mQueue.isEmpty());
+
+        // Enqueue elements into the queue
+        for (int i = 0; i < testList.size(); i++) {
+            mQueue.enqueue(testList.get(i));
+        }
+
+        // After enqueuing, the queue should not be empty
+        assertFalse(mQueue.isEmpty());
+
+        // Dequeue the elements and ensure they are dequeued in the correct order
+        for (int i = 0; i < testList.size(); i++) {
+            assertEquals(testList.get(i), mQueue.dequeue());
+            assertEquals(testList.size() - (i + 1), mQueue.size());
+    }
+
+        // After dequeuing all elements, the queue should be empty again
+        assertTrue(mQueue.isEmpty());
     }
 
     @Test
